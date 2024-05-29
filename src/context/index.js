@@ -69,14 +69,14 @@ function reducer(state, action) {
 function ArgonControllerProvider({ children }) {
   const initialState = {
     miniSidenav: false,
-    darkSidenav: false,
+    darkSidenav: true,
     sidenavColor: null,
     transparentNavbar: true,
     fixedNavbar: false,
     openConfigurator: false,
     direction: "ltr",
     layout: "dashboard",
-    darkMode: false,
+    darkMode: true,
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
