@@ -1,19 +1,3 @@
-/**
-=========================================================
-* Argon Dashboard 2 MUI - v3.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-material-ui
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
 // @mui material components
@@ -32,15 +16,14 @@ import { item, itemIcon, itemText, itemIconBox } from "examples/Sidenav/styles/s
 // Argon Dashboard 2 MUI context
 import { useArgonController } from "context";
 
-function SidenavItem({ icon, name, active, open, ...rest }) {
+function SidenavItem({ icon, name, active, open, collapse, ...rest }) {
   const [controller] = useArgonController();
   const { miniSidenav, darkSidenav, sidenavColor } = controller;
 
   return (
     <>
-      <ListItem component="li">
+      <ListItem component="li" {...rest}>
         <ArgonBox
-          {...rest}
           sx={(theme) => item(theme, { active, darkSidenav, sidenavColor, miniSidenav })}
         >
           <ListItemIcon sx={(theme) => itemIconBox(theme, { active, darkSidenav, sidenavColor })}>
@@ -55,6 +38,17 @@ function SidenavItem({ icon, name, active, open, ...rest }) {
             primary={name}
             sx={(theme) => itemText(theme, { miniSidenav, darkSidenav, active })}
           />
+          {collapse && (
+            <Icon
+              sx={{
+                ml: 1,
+                transition: "transform 0.2s ease-in-out",
+                transform: open ? "rotate(0deg)" : "rotate(-90deg)",
+              }}
+            >
+              expand_more
+            </Icon>
+          )}
         </ArgonBox>
       </ListItem>
     </>
@@ -63,18 +57,18 @@ function SidenavItem({ icon, name, active, open, ...rest }) {
 
 // Setting default values for the props of SidenavItem
 SidenavItem.defaultProps = {
-  color: "info",
   active: false,
   open: false,
+  collapse: false,
 };
 
 // Typechecking props for the SidenavItem
 SidenavItem.propTypes = {
-  color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   icon: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
   active: PropTypes.bool,
   open: PropTypes.bool,
+  collapse: PropTypes.bool,
 };
 
 export default SidenavItem;
