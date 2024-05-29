@@ -44,7 +44,6 @@ import createCache from "@emotion/cache";
 // Argon Dashboard 2 MUI routes
 import routes from "routes";
 
-// Argon Dashboard 2 MUI contexts
 import { useArgonController, setMiniSidenav, setOpenConfigurator } from "context";
 
 // Images
